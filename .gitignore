@@ -1,0 +1,11 @@
+# 개인정보 포함 원본 데이터 — GitHub에 올리지 않음
+KakaoTalk_Chat_*.csv
+KakaoTalk_Image_*.jpeg
+KakaoTalk_Image_*.jpg
+*.jpeg
+*.jpg
+*.png
+.claude/data/
+
+# 시스템 파일
+.DS_Store
