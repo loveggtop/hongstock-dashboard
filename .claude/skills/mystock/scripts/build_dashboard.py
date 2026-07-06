@@ -260,7 +260,7 @@ footer {{ font-size:12px; color:var(--muted); margin-top:8px }}
   {closed_note}
 </div>
 
-<footer>업데이트: 새 체결 CSV·분석 이미지를 이 폴더에 넣고 Claude Code에서 <b>/포트폴리오</b> 실행 → 이 파일이 다시 생성됩니다.</footer>
+<footer>업데이트: 새 체결 CSV·분석 이미지를 이 폴더에 넣고 Claude Code에서 <b>/mystock</b> 실행 → 이 파일이 다시 생성됩니다.</footer>
 </body></html>
 """
 OUT.write_text(html, encoding="utf-8")

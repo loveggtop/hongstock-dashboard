@@ -1,5 +1,5 @@
 ---
-name: 포트폴리오
+name: mystock
 description: 종목매수가현황 폴더의 증권사 체결 CSV(카카오톡 내보내기)와 NH 차트분석 AI 캡처 이미지를 반영해 보유종목 통합분석 대시보드(통합분석.html)를 생성·업데이트한다. 사용자가 "포트폴리오", "통합분석", "대시보드 업데이트/갱신"을 요청하거나 새 체결 파일·분석 이미지를 폴더에 추가했다고 말할 때 사용.
 model: claude-fable-5
 effort: high
@@ -15,7 +15,7 @@ allowed-tools: Bash(python3 *), Bash(open *), Bash(git *), Read, Write, Edit
 ## 1. 거래내역 파싱
 
 ```bash
-python3 .claude/skills/포트폴리오/scripts/parse_trades.py .
+python3 .claude/skills/mystock/scripts/parse_trades.py .
 ```
 
 - 폴더의 모든 `KakaoTalk_Chat_*.csv`(NH투자증권·한국투자증권 체결 알림)를 파싱해
@@ -50,7 +50,7 @@ python3 .claude/skills/포트폴리오/scripts/parse_trades.py .
 ## 3. 대시보드 재생성
 
 ```bash
-python3 .claude/skills/포트폴리오/scripts/build_dashboard.py .
+python3 .claude/skills/mystock/scripts/build_dashboard.py .
 ```
 
 `통합분석.html`이 갱신된다. 출력 요약(보유종목 수, 평가손익, 실현손익)을 확인한다.
