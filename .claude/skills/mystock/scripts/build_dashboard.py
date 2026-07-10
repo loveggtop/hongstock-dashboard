@@ -38,6 +38,18 @@ def pct(v):
     return ("+" if v > 0 else "−" if v < 0 else "") + f"{abs(v):.2f}%"
 
 
+# ── 종목별 매수/매도 최고·최저 체결가 ─────────────────────────────
+extremes = {}
+for tr in trades.get("trades", []):
+    e = extremes.setdefault(tr["name"], {"buy": [], "sell": []})
+    e[tr["side"]].append(tr["price"])
+
+
+def rng(name, side):
+    prices = extremes.get(name, {}).get(side, [])
+    return (min(prices), max(prices)) if prices else None
+
+
 # ── 종목별 지표 결합 ───────────────────────────────────────────────
 rows = []
 for p in positions:
@@ -48,6 +60,7 @@ for p in positions:
     ev = (cur - p["avg_price"]) * p["qty"] if cur else None
     evp = (cur / p["avg_price"] - 1) * 100 if cur and p["avg_price"] else None
     rows.append({**p, "analysis": a, "quote": q, "cur": cur, "cost": cost, "ev": ev, "evp": evp,
+                 "buy_rng": rng(p["name"], "buy"), "sell_rng": rng(p["name"], "sell"),
                  "img_file": latest.get(p["name"], "")})
 
 total_cost = sum(r["cost"] for r in rows if r["currency"] == "KRW")
@@ -113,6 +126,22 @@ def strip_html(r):
       </div>"""
 
 
+def rng_txt(rg):
+    if not rg:
+        return "—"
+    lo, hi = rg
+    return won(lo) if lo == hi else f"{won(lo)} ~ {won(hi)}"
+
+
+def rng_line(r):
+    parts = []
+    if r["buy_rng"]:
+        parts.append(f'매수 체결 {rng_txt(r["buy_rng"])}원')
+    if r["sell_rng"]:
+        parts.append(f'매도 체결 {rng_txt(r["sell_rng"])}원')
+    return f'<div class="card-sub">{" · ".join(parts)} <span class="rng-note">(최저~최고)</span></div>' if parts else ""
+
+
 def card_html(r):
     a = r["analysis"]
     head = f"""
@@ -120,7 +149,8 @@ def card_html(r):
         <div><span class="stock-name">{r['name']}</span> <span class="stock-code">{r['code']}</span></div>
         <div class="stock-pnl {'gain' if (r['evp'] or 0) >= 0 else 'loss'}">{pct(r['evp']) if r['evp'] is not None else '—'}</div>
       </div>
-      <div class="card-sub">{r['qty']}주 · 평단 {won(r['avg_price'])}원 · 매입 {won(r['cost'])}원 · 평가손익 <b class="{'gain' if (r['ev'] or 0) >= 0 else 'loss'}">{won(r['ev'], True) if r['ev'] is not None else '—'}원</b></div>"""
+      <div class="card-sub">{r['qty']}주 · 평단 {won(r['avg_price'])}원 · 매입 {won(r['cost'])}원 · 평가손익 <b class="{'gain' if (r['ev'] or 0) >= 0 else 'loss'}">{won(r['ev'], True) if r['ev'] is not None else '—'}원</b></div>
+      {rng_line(r)}"""
     strategy = a.get("strategy") if a else None
     comment = a.get("comment") if a else None
     body = strip_html(r)
@@ -144,6 +174,7 @@ def card_quote(r):
           <div class="stock-pnl {'gain' if (r['evp'] or 0) >= 0 else 'loss'}">{pct(r['evp'])}</div>
         </div>
         <div class="card-sub">{r['qty']}주 · 평단 {won(r['avg_price'])}원 · 매입 {won(r['cost'])}원 · 평가손익 <b class="{'gain' if (r['ev'] or 0) >= 0 else 'loss'}">{won(r['ev'], True)}원</b></div>
+        {rng_line(r)}
         <div class="card-sub">현재가 {won(r['cur'])}원 ({pct(q.get('change_pct', 0))})</div>
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 지지/저항·매매전략은 표시되지 않습니다. NH 차트분석 캡처를 폴더에 넣고 재실행하면 표시됩니다.</span></div>
         <div class="card-src">현재가 기준: {q.get('source', '웹 시세')} · {q.get('asof', '')}</div>
@@ -155,6 +186,7 @@ def card_missing(r):
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">{r['name']}</span> <span class="stock-code">{r['code']}</span></div><div class="stock-pnl">—</div></div>
         <div class="card-sub">{r['qty']}주 · 평단 {won(r['avg_price'])}원 · 매입 {won(r['cost'])}원 · 실현손익 {won(r['realized_pnl'], True)}원</div>
+        {rng_line(r)}
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
       </div>"""
 
@@ -162,6 +194,10 @@ def card_missing(r):
 table_rows = "".join(
     f"""<tr><td>{r['name']}</td><td>{r['code']}</td><td>{'·'.join(r['brokers'])}</td>
     <td class="num">{r['qty']:,}</td><td class="num">{won(r['avg_price'])}</td>
+    <td class="num">{won(r['buy_rng'][1]) if r['buy_rng'] else '—'}</td>
+    <td class="num">{won(r['buy_rng'][0]) if r['buy_rng'] else '—'}</td>
+    <td class="num">{won(r['sell_rng'][1]) if r['sell_rng'] else '—'}</td>
+    <td class="num">{won(r['sell_rng'][0]) if r['sell_rng'] else '—'}</td>
     <td class="num">{won(r['cur']) if r['cur'] else '—'}</td>
     <td class="num {'gain' if (r['ev'] or 0) > 0 else 'loss' if (r['ev'] or 0) < 0 else ''}">{won(r['ev'], True) if r['ev'] is not None else '—'}</td>
     <td class="num {'gain' if (r['evp'] or 0) > 0 else 'loss' if (r['evp'] or 0) < 0 else ''}">{pct(r['evp']) if r['evp'] is not None else '—'}</td>
@@ -244,7 +280,9 @@ h1 {{ font-size:22px; font-weight:700 }}
 .strat-tag {{ flex:0 0 auto; font-size:11px; font-weight:600; padding:1px 7px; border-radius:99px; border:1px solid var(--border); margin-top:2px }}
 .strat-buy {{ color:var(--gain) }} .strat-sell {{ color:var(--loss) }} .strat-stop {{ color:var(--warn) }} .strat-note {{ color:var(--muted) }}
 .card-src {{ font-size:11px; color:var(--muted); margin-top:10px }}
-table {{ width:100%; border-collapse:collapse; font-size:13px }}
+.rng-note {{ font-size:11px; color:var(--muted) }}
+.tbl-wrap {{ overflow-x:auto }}
+table {{ width:100%; border-collapse:collapse; font-size:13px; min-width:900px }}
 th {{ text-align:left; color:var(--muted); font-weight:500; border-bottom:1px solid var(--grid); padding:6px 8px }}
 td {{ border-bottom:1px solid var(--grid); padding:6px 8px }}
 td.num, th.num {{ text-align:right; font-variant-numeric:tabular-nums }}
@@ -276,9 +314,9 @@ footer {{ font-size:12px; color:var(--muted); margin-top:8px }}
 
 <div class="panel">
   <h2>전체 보유내역</h2>
-  <p class="desc">평균단가법 기준. 실현손익은 매도분에 대한 누계.</p>
-  <table><thead><tr><th>종목</th><th>코드</th><th>증권사</th><th class="num">보유</th><th class="num">평단(원)</th><th class="num">현재가</th><th class="num">평가손익</th><th class="num">손익률</th><th class="num">실현손익</th></tr></thead>
-  <tbody>{table_rows}</tbody></table>
+  <p class="desc">평균단가법 기준. 실현손익은 매도분에 대한 누계. 매수/매도 최고·최저는 전체 체결 기록 기준.</p>
+  <div class="tbl-wrap"><table><thead><tr><th>종목</th><th>코드</th><th>증권사</th><th class="num">보유</th><th class="num">평단(원)</th><th class="num">매수최고</th><th class="num">매수최저</th><th class="num">매도최고</th><th class="num">매도최저</th><th class="num">현재가</th><th class="num">평가손익</th><th class="num">손익률</th><th class="num">실현손익</th></tr></thead>
+  <tbody>{table_rows}</tbody></table></div>
   {closed_note}
 </div>
 
