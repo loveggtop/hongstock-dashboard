@@ -74,12 +74,12 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums }
 footer { font-size:12px; color:var(--muted); margin-top:8px }
 </style></head><body>
 <h1>보유종목 통합분석</h1>
-<p class="meta">생성일 2026-07-10 · 체결 553건 (KakaoTalk_Chat_NH투자증권_2026-07-10-09-52-09.csv, KakaoTalk_Chat_한국투자증권_2026-07-10-09-51-39.csv) · 현재가는 NH 차트분석 AI 캡처 시점 기준</p>
+<p class="meta">생성일 2026-07-10 · 체결 553건 (KakaoTalk_Chat_NH투자증권_2026-07-10-09-52-09.csv, KakaoTalk_Chat_한국투자증권_2026-07-10-09-51-39.csv) · 현재가는 NH 차트분석 AI 캡처 시점 기준 (웹 시세 종목은 조회 시점)</p>
 
 <div class="kpis">
-  <div class="kpi"><div class="kpi-l">보유 종목</div><div class="kpi-v">10개</div><div class="kpi-s">분석 이미지 보유 6개 / 미보유 4개</div></div>
+  <div class="kpi"><div class="kpi-l">보유 종목</div><div class="kpi-v">10개</div><div class="kpi-s">분석 이미지 6개 / 웹 시세 1개 / 시세 없음 3개</div></div>
   <div class="kpi"><div class="kpi-l">총 매입금액 (보유분)</div><div class="kpi-v">87,397,747원</div></div>
-  <div class="kpi"><div class="kpi-l">평가손익 (분석가능 6종목)</div><div class="kpi-v gain">+1,094,933원</div><div class="kpi-s">매입 68,142,867원 대비 +1.61%</div></div>
+  <div class="kpi"><div class="kpi-l">평가손익 (시세보유 7종목)</div><div class="kpi-v gain">+1,105,333원</div><div class="kpi-s">매입 68,707,867원 대비 +1.61%</div></div>
   <div class="kpi"><div class="kpi-l">실현손익 누계</div><div class="kpi-v gain">+2,101,576원</div></div>
 </div>
 
@@ -102,6 +102,14 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
           <div class="bar-mid"></div>
           <div class="bar gain" style="left:50%;width:6.36%"></div>
           <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 6.36% + 6px)">+5.44%</div>
+        </div>
+      </div>
+      <div class="bar-row" data-tip="한화오션 평단 80,714 → 현재 82,200 / 평가손익 +10,400원">
+        <div class="bar-name">한화오션</div>
+        <div class="bar-track">
+          <div class="bar-mid"></div>
+          <div class="bar gain" style="left:50%;width:2.15%"></div>
+          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 2.15% + 6px)">+1.84%</div>
         </div>
       </div>
       <div class="bar-row" data-tip="천보 평단 51,433 → 현재 47,400 / 평가손익 −463,750원">
@@ -207,6 +215,17 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
         <div class="dot cur loss" style="left:20.70%" data-tip="현재가 20,950원"><span class="dot-lbl dot-lbl-top">현재 20,950</span></div>
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-note">요약</span><span>하락세 뚜렷, 급락 후 횡보. 단기 반등 쉽지 않음, 추가 하락 대비</span></div></div><div class="card-src">분석 기준: 30,850 (02/23) 대비 -32.09% · KakaoTalk_Image_2026-07-06-12-11-20_007.jpeg</div></div>
 
+      <div class="card">
+        <div class="card-head">
+          <div><span class="stock-name">한화오션</span> <span class="stock-code">042660</span></div>
+          <div class="stock-pnl gain">+1.84%</div>
+        </div>
+        <div class="card-sub">7주 · 평단 80,714원 · 매입 565,000원 · 평가손익 <b class="gain">+10,400원</b></div>
+        <div class="card-sub">현재가 82,200원 (+4.58%)</div>
+        <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 지지/저항·매매전략은 표시되지 않습니다. NH 차트분석 캡처를 폴더에 넣고 재실행하면 표시됩니다.</span></div>
+        <div class="card-src">현재가 기준: 네이버 금융 · 2026-07-10 장중</div>
+      </div>
+
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">KODEX 200타겟위클리커버드콜</span> <span class="stock-code">498400</span></div><div class="stock-pnl">—</div></div>
         <div class="card-sub">149주 · 평단 22,471원 · 매입 3,348,237원 · 실현손익 +237,707원</div>
@@ -220,11 +239,6 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">삼성전자우</span> <span class="stock-code">005935</span></div><div class="stock-pnl">—</div></div>
         <div class="card-sub">35주 · 평단 193,898원 · 매입 6,786,436원 · 실현손익 +1,140,736원</div>
-        <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
-      </div>
-      <div class="card card-dim">
-        <div class="card-head"><div><span class="stock-name">한화오션</span> <span class="stock-code">042660</span></div><div class="stock-pnl">—</div></div>
-        <div class="card-sub">7주 · 평단 80,714원 · 매입 565,000원 · 실현손익 0원</div>
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
       </div>
 </div>
@@ -280,9 +294,9 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
     <td class="num loss">−9.59%</td>
     <td class="num">0</td></tr><tr><td>한화오션</td><td>042660</td><td>NH투자증권·한국투자증권</td>
     <td class="num">7</td><td class="num">80,714</td>
-    <td class="num">—</td>
-    <td class="num ">—</td>
-    <td class="num ">—</td>
+    <td class="num">82,200</td>
+    <td class="num gain">+10,400</td>
+    <td class="num gain">+1.84%</td>
     <td class="num">0</td></tr></tbody></table>
   <p class="note">청산·기록불완전 종목: 애플(74주 매도, 매수기록 없음)</p>
 </div>
