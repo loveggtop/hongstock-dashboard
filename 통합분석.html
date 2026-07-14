@@ -66,7 +66,9 @@ h1 { font-size:22px; font-weight:700 }
 .strat-tag { flex:0 0 auto; font-size:11px; font-weight:600; padding:1px 7px; border-radius:99px; border:1px solid var(--border); margin-top:2px }
 .strat-buy { color:var(--gain) } .strat-sell { color:var(--loss) } .strat-stop { color:var(--warn) } .strat-note { color:var(--muted) }
 .card-src { font-size:11px; color:var(--muted); margin-top:10px }
-table { width:100%; border-collapse:collapse; font-size:13px }
+.rng-note { font-size:11px; color:var(--muted) }
+.tbl-wrap { overflow-x:auto }
+table { width:100%; border-collapse:collapse; font-size:13px; min-width:900px }
 th { text-align:left; color:var(--muted); font-weight:500; border-bottom:1px solid var(--grid); padding:6px 8px }
 td { border-bottom:1px solid var(--grid); padding:6px 8px }
 td.num, th.num { text-align:right; font-variant-numeric:tabular-nums }
@@ -74,13 +76,13 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums }
 footer { font-size:12px; color:var(--muted); margin-top:8px }
 </style></head><body>
 <h1>보유종목 통합분석</h1>
-<p class="meta">생성일 2026-07-08 · 체결 517건 (KakaoTalk_Chat_NH투자증권_2026-07-08-10-26-43.csv, KakaoTalk_Chat_한국투자증권_2026-07-08-10-27-22.csv) · 현재가는 NH 차트분석 AI 캡처 시점 기준</p>
+<p class="meta">생성일 2026-07-14 · 체결 606건 (KakaoTalk_Chat_NH투자증권_2026-07-14-16-31-25.csv, KakaoTalk_Chat_한국투자증권_2026-07-14-16-31-55.csv) · 현재가는 NH 차트분석 AI 캡처 시점 기준 (웹 시세 종목은 조회 시점)</p>
 
 <div class="kpis">
-  <div class="kpi"><div class="kpi-l">보유 종목</div><div class="kpi-v">9개</div><div class="kpi-s">분석 이미지 보유 6개 / 미보유 3개</div></div>
-  <div class="kpi"><div class="kpi-l">총 매입금액 (보유분)</div><div class="kpi-v">80,479,457원</div></div>
-  <div class="kpi"><div class="kpi-l">평가손익 (분석가능 6종목)</div><div class="kpi-v gain">+1,154,633원</div><div class="kpi-s">매입 63,739,167원 대비 +1.81%</div></div>
-  <div class="kpi"><div class="kpi-l">실현손익 누계</div><div class="kpi-v gain">+2,101,576원</div></div>
+  <div class="kpi"><div class="kpi-l">보유 종목</div><div class="kpi-v">10개</div><div class="kpi-s">분석 이미지 6개 / 웹 시세 1개 / 시세 없음 3개</div></div>
+  <div class="kpi"><div class="kpi-l">총 매입금액 (보유분)</div><div class="kpi-v">91,314,906원</div></div>
+  <div class="kpi"><div class="kpi-l">평가손익 (시세보유 7종목)</div><div class="kpi-v gain">+1,139,083원</div><div class="kpi-s">매입 71,249,317원 대비 +1.60%</div></div>
+  <div class="kpi"><div class="kpi-l">실현손익 누계</div><div class="kpi-v gain">+2,127,935원</div></div>
 </div>
 
 <div class="panel">
@@ -88,52 +90,60 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
   <p class="desc">평균단가 대비 최근 분석 이미지의 현재가 기준</p>
   <div class="legend"><span><i style="background:var(--gain)"></i>수익</span><span><i style="background:var(--loss)"></i>손실</span></div>
   
-      <div class="bar-row" data-tip="엘앤에프 평단 105,439 → 현재 148,200 / 평가손익 +1,966,984원">
+      <div class="bar-row" data-tip="엘앤에프 평단 102,578 → 현재 148,200 / 평가손익 +2,372,334원">
         <div class="bar-name">엘앤에프</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
           <div class="bar gain" style="left:50%;width:50.00%"></div>
-          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 50.00% + 6px)">+40.55%</div>
+          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 50.00% + 6px)">+44.48%</div>
         </div>
       </div>
       <div class="bar-row" data-tip="POSCO홀딩스 평단 399,770 → 현재 421,500 / 평가손익 +1,934,000원">
         <div class="bar-name">POSCO홀딩스</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
-          <div class="bar gain" style="left:50%;width:6.70%"></div>
-          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 6.70% + 6px)">+5.44%</div>
+          <div class="bar gain" style="left:50%;width:6.11%"></div>
+          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 6.11% + 6px)">+5.44%</div>
         </div>
       </div>
-      <div class="bar-row" data-tip="천보 평단 51,747 → 현재 47,400 / 평가손익 −491,251원">
+      <div class="bar-row" data-tip="한화오션 평단 78,457 → 현재 82,200 / 평가손익 +86,100원">
+        <div class="bar-name">한화오션</div>
+        <div class="bar-track">
+          <div class="bar-mid"></div>
+          <div class="bar gain" style="left:50%;width:5.36%"></div>
+          <div class="bar-lbl bar-lbl-r" style="left:calc(50% + 5.36% + 6px)">+4.77%</div>
+        </div>
+      </div>
+      <div class="bar-row" data-tip="천보 평단 51,433 → 현재 47,400 / 평가손익 −463,750원">
         <div class="bar-name">천보</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
-          <div class="bar loss" style="left:39.64%;width:10.36%"></div>
-          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 10.36% + 6px)">−8.40%</div>
+          <div class="bar loss" style="left:41.19%;width:8.81%"></div>
+          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 8.81% + 6px)">−7.84%</div>
         </div>
       </div>
       <div class="bar-row" data-tip="카카오뱅크 평단 23,171 → 현재 20,950 / 평가손익 −31,100원">
         <div class="bar-name">카카오뱅크</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
-          <div class="bar loss" style="left:38.18%;width:11.82%"></div>
-          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 11.82% + 6px)">−9.59%</div>
+          <div class="bar loss" style="left:39.22%;width:10.78%"></div>
+          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 10.78% + 6px)">−9.59%</div>
         </div>
       </div>
       <div class="bar-row" data-tip="카카오 평단 43,498 → 현재 38,800 / 평가손익 −1,043,000원">
         <div class="bar-name">카카오</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
-          <div class="bar loss" style="left:36.68%;width:13.32%"></div>
-          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 13.32% + 6px)">−10.80%</div>
+          <div class="bar loss" style="left:37.86%;width:12.14%"></div>
+          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 12.14% + 6px)">−10.80%</div>
         </div>
       </div>
-      <div class="bar-row" data-tip="현대모비스 평단 498,733 → 현재 420,000 / 평가손익 −1,181,000원">
+      <div class="bar-row" data-tip="현대모비스 평단 485,981 → 현재 420,000 / 평가손익 −1,715,500원">
         <div class="bar-name">현대모비스</div>
         <div class="bar-track">
           <div class="bar-mid"></div>
-          <div class="bar loss" style="left:30.54%;width:19.46%"></div>
-          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 19.46% + 6px)">−15.79%</div>
+          <div class="bar loss" style="left:34.74%;width:15.26%"></div>
+          <div class="bar-lbl bar-lbl-l" style="right:calc(50% + 15.26% + 6px)">−13.58%</div>
         </div>
       </div>
 </div>
@@ -145,6 +155,7 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
         <div class="stock-pnl loss">−10.80%</div>
       </div>
       <div class="card-sub">222주 · 평단 43,498원 · 매입 9,656,600원 · 평가손익 <b class="loss">−1,043,000원</b></div>
+      <div class="card-sub">매수 체결 33,900 ~ 47,900원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
         <div class="tick" style="left:4.07%"><span class="tick-lbl">지지2<br>36,000</span></div><div class="tick" style="left:24.43%"><span class="tick-lbl">지지1<br>38,700</span></div><div class="tick" style="left:64.40%"><span class="tick-lbl">저항1<br>44,000</span></div><div class="tick" style="left:94.57%"><span class="tick-lbl">저항2<br>48,000</span></div>
@@ -153,13 +164,14 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-note">요약</span><span>이평선(20/60/120) 모두 주가 위 — 단·중·장기 모두 하락 추세. 급락+거래량 증가 동반, 추가 하락 유의</span></div></div><div class="card-src">분석 기준: 64,500 (02/27) 대비 -39.84% · KakaoTalk_Image_2026-07-06-12-11-20_004.jpeg</div></div><div class="card">
       <div class="card-head">
         <div><span class="stock-name">천보</span> <span class="stock-code">278280</span></div>
-        <div class="stock-pnl loss">−8.40%</div>
+        <div class="stock-pnl loss">−7.84%</div>
       </div>
-      <div class="card-sub">113주 · 평단 51,747원 · 매입 5,847,451원 · 평가손익 <b class="loss">−491,251원</b></div>
+      <div class="card-sub">115주 · 평단 51,433원 · 매입 5,914,750원 · 평가손익 <b class="loss">−463,750원</b></div>
+      <div class="card-sub">매수 체결 33,500 ~ 66,700원 · 매도 체결 62,900 ~ 70,000원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
         <div class="tick" style="left:4.07%"><span class="tick-lbl">지지2<br>42,000</span></div><div class="tick" style="left:23.46%"><span class="tick-lbl">지지1<br>45,000</span></div><div class="tick" style="left:68.71%"><span class="tick-lbl">저항1<br>52,000</span></div><div class="tick" style="left:94.57%"><span class="tick-lbl">저항2<br>56,000</span></div>
-        <div class="dot avg" style="left:67.08%" data-tip="평균단가 51,747원"><span class="dot-lbl">평단 51,747</span></div>
+        <div class="dot avg" style="left:65.05%" data-tip="평균단가 51,433원"><span class="dot-lbl">평단 51,433</span></div>
         <div class="dot cur loss" style="left:38.98%" data-tip="현재가 47,400원"><span class="dot-lbl dot-lbl-top">현재 47,400</span></div>
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-buy">매수</span><span>45,000원 부근 분할 매수 가능, 추가 하락 시 42,000원에서 추가 매수 고려</span></div><div class="strat"><span class="strat-tag strat-sell">매도</span><span>52,000원 부근 일부 매도, 56,000원까지 상승 시 추가 매도 고려</span></div><div class="strat"><span class="strat-tag strat-stop">손절</span><span>42,000원 이탈 시 손절 고려. 급락 이후이므로 손절 기준 명확히</span></div></div><div class="card-src">분석 기준: 71,300 (04/23) 대비 -33.52% · KakaoTalk_Image_2026-07-06-12-11-20_006.jpeg</div></div><div class="card">
       <div class="card-head">
@@ -167,6 +179,7 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
         <div class="stock-pnl gain">+5.44%</div>
       </div>
       <div class="card-sub">89주 · 평단 399,770원 · 매입 35,579,500원 · 평가손익 <b class="gain">+1,934,000원</b></div>
+      <div class="card-sub">매수 체결 300,000 ~ 513,000원 · 매도 체결 367,500 ~ 385,500원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
         <div class="tick" style="left:3.89%"><span class="tick-lbl">지지2<br>355,500</span></div><div class="tick" style="left:43.66%"><span class="tick-lbl">지지1<br>410,000</span></div><div class="tick" style="left:65.56%"><span class="tick-lbl">저항1<br>440,000</span></div><div class="tick" style="left:94.75%"><span class="tick-lbl">저항2<br>480,000</span></div>
@@ -175,31 +188,34 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-buy">매수</span><span>410,000원 부근 반등 신호 확인 시 소량 분할 매수, 거래량 동반 상승 캔들에서 타이밍</span></div><div class="strat"><span class="strat-tag strat-sell">매도</span><span>440,000원 부근 매도 관점, 반등 나와도 480,000원까지 무리한 홀딩 금지</span></div><div class="strat"><span class="strat-tag strat-stop">손절</span><span>410,000원 이탈 시 손절 고려, 355,500원 하락 시 반드시 손절</span></div></div><div class="card-src">분석 기준: 542,000 (05/07) 대비 -22.23% · KakaoTalk_Image_2026-07-06-12-11-20_005.jpeg</div></div><div class="card">
       <div class="card-head">
         <div><span class="stock-name">엘앤에프</span> <span class="stock-code">066970</span></div>
-        <div class="stock-pnl gain">+40.55%</div>
+        <div class="stock-pnl gain">+44.48%</div>
       </div>
-      <div class="card-sub">46주 · 평단 105,439원 · 매입 4,850,216원 · 평가손익 <b class="gain">+1,966,984원</b></div>
+      <div class="card-sub">52주 · 평단 102,578원 · 매입 5,334,066원 · 평가손익 <b class="gain">+2,372,334원</b></div>
+      <div class="card-sub">매수 체결 88,400 ~ 187,000원 · 매도 체결 104,300 ~ 170,000원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
-        <div class="tick" style="left:45.84%"><span class="tick-lbl">지지2<br>140,000</span></div><div class="tick" style="left:52.56%"><span class="tick-lbl tick-lbl-low">지지1<br>145,300</span></div><div class="tick" style="left:71.21%"><span class="tick-lbl">저항1<br>160,000</span></div><div class="tick" style="left:96.58%"><span class="tick-lbl">저항2<br>180,000</span></div>
-        <div class="dot avg" style="left:2.01%" data-tip="평균단가 105,439원"><span class="dot-lbl">평단 105,439</span></div>
-        <div class="dot cur gain" style="left:56.24%" data-tip="현재가 148,200원"><span class="dot-lbl dot-lbl-top">현재 148,200</span></div>
+        <div class="tick" style="left:47.71%"><span class="tick-lbl">지지2<br>140,000</span></div><div class="tick" style="left:54.20%"><span class="tick-lbl tick-lbl-low">지지1<br>145,300</span></div><div class="tick" style="left:72.20%"><span class="tick-lbl">저항1<br>160,000</span></div><div class="tick" style="left:96.69%"><span class="tick-lbl">저항2<br>180,000</span></div>
+        <div class="dot avg" style="left:1.88%" data-tip="평균단가 102,578원"><span class="dot-lbl">평단 102,578</span></div>
+        <div class="dot cur gain" style="left:57.75%" data-tip="현재가 148,200원"><span class="dot-lbl dot-lbl-top">현재 148,200</span></div>
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-buy">매수</span><span>하락세 지속 중. 145,300원 부근 반등 신호 확인될 때 분할 매수 접근</span></div><div class="strat"><span class="strat-tag strat-sell">매도</span><span>160,000원 부근 매도세 강할 수 있음 — 반등 시 일부 매도</span></div><div class="strat"><span class="strat-tag strat-stop">손절</span><span>140,000원 이탈 시 추가 하락 가능 — 이 구간 아래에서 손절 고려</span></div></div><div class="card-src">분석 기준: 225,000 (05/04) 대비 -34.13% · KakaoTalk_Image_2026-07-06-12-11-20_008.jpeg</div></div><div class="card">
       <div class="card-head">
         <div><span class="stock-name">현대모비스</span> <span class="stock-code">012330</span></div>
-        <div class="stock-pnl loss">−15.79%</div>
+        <div class="stock-pnl loss">−13.58%</div>
       </div>
-      <div class="card-sub">15주 · 평단 498,733원 · 매입 7,481,000원 · 평가손익 <b class="loss">−1,181,000원</b></div>
+      <div class="card-sub">26주 · 평단 485,981원 · 매입 12,635,500원 · 평가손익 <b class="loss">−1,715,500원</b></div>
+      <div class="card-sub">매수 체결 425,500 ~ 709,000원 · 매도 체결 526,000 ~ 595,000원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
-        <div class="tick" style="left:5.35%"><span class="tick-lbl">지지1<br>400,000</span></div><div class="tick" style="left:49.90%"><span class="tick-lbl">저항1<br>450,000</span></div>
-        <div class="dot avg" style="left:93.33%" data-tip="평균단가 498,733원"><span class="dot-lbl">평단 498,733</span></div>
-        <div class="dot cur loss" style="left:23.17%" data-tip="현재가 420,000원"><span class="dot-lbl dot-lbl-top">현재 420,000</span></div>
+        <div class="tick" style="left:6.04%"><span class="tick-lbl">지지1<br>400,000</span></div><div class="tick" style="left:56.41%"><span class="tick-lbl">저항1<br>450,000</span></div>
+        <div class="dot avg" style="left:92.66%" data-tip="평균단가 485,981원"><span class="dot-lbl">평단 485,981</span></div>
+        <div class="dot cur loss" style="left:26.19%" data-tip="현재가 420,000원"><span class="dot-lbl dot-lbl-top">현재 420,000</span></div>
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-buy">매수</span><span>급락 이후 400,000원 부근 분할 매수 고려. 추가 하락 가능성 있어 신중 접근</span></div><div class="strat"><span class="strat-tag strat-sell">매도</span><span>450,000원 부근 일부 이익 실현. 반등 약하면 추가 하락 전 비중 축소</span></div><div class="strat"><span class="strat-tag strat-stop">손절</span><span>(화면 잘림)</span></div></div><div class="card-src">분석 기준: 531,000 (02/27) 대비 -20.90% · KakaoTalk_Image_2026-07-06-12-11-21_010.jpeg</div></div><div class="card">
       <div class="card-head">
         <div><span class="stock-name">카카오뱅크</span> <span class="stock-code">323410</span></div>
         <div class="stock-pnl loss">−9.59%</div>
       </div>
       <div class="card-sub">14주 · 평단 23,171원 · 매입 324,400원 · 평가손익 <b class="loss">−31,100원</b></div>
+      <div class="card-sub">매수 체결 22,300 ~ 24,850원 <span class="rng-note">(최저~최고)</span></div>
       <div class="strip">
         <div class="strip-track"></div>
         <div class="tick" style="left:8.40%"><span class="tick-lbl">지지2<br>20,500</span></div><div class="tick" style="left:20.70%"><span class="tick-lbl">지지1<br>20,950</span></div><div class="tick" style="left:63.05%"><span class="tick-lbl">저항1<br>22,500</span></div><div class="tick" style="left:90.37%"><span class="tick-lbl">저항2<br>23,500</span></div>
@@ -207,73 +223,133 @@ footer { font-size:12px; color:var(--muted); margin-top:8px }
         <div class="dot cur loss" style="left:20.70%" data-tip="현재가 20,950원"><span class="dot-lbl dot-lbl-top">현재 20,950</span></div>
       </div><div class="strats"><div class="strat"><span class="strat-tag strat-note">요약</span><span>하락세 뚜렷, 급락 후 횡보. 단기 반등 쉽지 않음, 추가 하락 대비</span></div></div><div class="card-src">분석 기준: 30,850 (02/23) 대비 -32.09% · KakaoTalk_Image_2026-07-06-12-11-20_007.jpeg</div></div>
 
+      <div class="card">
+        <div class="card-head">
+          <div><span class="stock-name">한화오션</span> <span class="stock-code">042660</span></div>
+          <div class="stock-pnl gain">+4.77%</div>
+        </div>
+        <div class="card-sub">23주 · 평단 78,457원 · 매입 1,804,500원 · 평가손익 <b class="gain">+86,100원</b></div>
+        <div class="card-sub">매수 체결 74,500 ~ 82,500원 <span class="rng-note">(최저~최고)</span></div>
+        <div class="card-sub">현재가 82,200원 (+4.58%)</div>
+        <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 지지/저항·매매전략은 표시되지 않습니다. NH 차트분석 캡처를 폴더에 넣고 재실행하면 표시됩니다.</span></div>
+        <div class="card-src">현재가 기준: 네이버 금융 · 2026-07-10 장중</div>
+      </div>
+
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">KODEX 200타겟위클리커버드콜</span> <span class="stock-code">498400</span></div><div class="stock-pnl">—</div></div>
-        <div class="card-sub">146주 · 평단 22,464원 · 매입 3,279,747원 · 실현손익 +237,707원</div>
+        <div class="card-sub">175주 · 평단 22,380원 · 매입 3,916,537원 · 실현손익 +237,707원</div>
+        <div class="card-sub">매수 체결 19,885 ~ 26,090원 · 매도 체결 18,265 ~ 28,100원 <span class="rng-note">(최저~최고)</span></div>
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
       </div>
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">KODEX 200</span> <span class="stock-code">069500</span></div><div class="stock-pnl">—</div></div>
         <div class="card-sub">77주 · 평단 111,107원 · 매입 8,555,207원 · 실현손익 +468,616원</div>
+        <div class="card-sub">매수 체결 100,150 ~ 139,900원 · 매도 체결 87,670 ~ 143,880원 <span class="rng-note">(최저~최고)</span></div>
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
       </div>
       <div class="card card-dim">
         <div class="card-head"><div><span class="stock-name">삼성전자우</span> <span class="stock-code">005935</span></div><div class="stock-pnl">—</div></div>
-        <div class="card-sub">25주 · 평단 196,213원 · 매입 4,905,336원 · 실현손익 +1,140,736원</div>
+        <div class="card-sub">40주 · 평단 189,846원 · 매입 7,593,846원 · 실현손익 +1,163,245원</div>
+        <div class="card-sub">매수 체결 172,500 ~ 224,500원 · 매도 체결 138,600 ~ 236,000원 <span class="rng-note">(최저~최고)</span></div>
         <div class="strat"><span class="strat-tag strat-note">안내</span><span>차트분석 AI 캡처가 없어 현재가·지지/저항 정보가 없습니다. NH 차트분석 AI 화면을 캡처해 이 폴더에 넣고 스킬을 재실행하세요.</span></div>
       </div>
 </div>
 
 <div class="panel">
   <h2>전체 보유내역</h2>
-  <p class="desc">평균단가법 기준. 실현손익은 매도분에 대한 누계.</p>
-  <table><thead><tr><th>종목</th><th>코드</th><th>증권사</th><th class="num">보유</th><th class="num">평단(원)</th><th class="num">현재가</th><th class="num">평가손익</th><th class="num">손익률</th><th class="num">실현손익</th></tr></thead>
+  <p class="desc">평균단가법 기준. 실현손익은 매도분에 대한 누계. 매수/매도 최고·최저는 전체 체결 기록 기준.</p>
+  <div class="tbl-wrap"><table><thead><tr><th>종목</th><th>코드</th><th>증권사</th><th class="num">보유</th><th class="num">평단(원)</th><th class="num">매수최고</th><th class="num">매수최저</th><th class="num">매도최고</th><th class="num">매도최저</th><th class="num">현재가</th><th class="num">평가손익</th><th class="num">손익률</th><th class="num">실현손익</th></tr></thead>
   <tbody><tr><td>카카오</td><td>035720</td><td>NH투자증권</td>
     <td class="num">222</td><td class="num">43,498</td>
+    <td class="num">47,900</td>
+    <td class="num">33,900</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
     <td class="num">38,800</td>
     <td class="num loss">−1,043,000</td>
     <td class="num loss">−10.80%</td>
     <td class="num">0</td></tr><tr><td>KODEX 200타겟위클리커버드콜</td><td>498400</td><td>NH투자증권·한국투자증권</td>
-    <td class="num">146</td><td class="num">22,464</td>
+    <td class="num">175</td><td class="num">22,380</td>
+    <td class="num">26,090</td>
+    <td class="num">19,885</td>
+    <td class="num">28,100</td>
+    <td class="num">18,265</td>
     <td class="num">—</td>
     <td class="num ">—</td>
     <td class="num ">—</td>
     <td class="num">+237,707</td></tr><tr><td>천보</td><td>278280</td><td>NH투자증권</td>
-    <td class="num">113</td><td class="num">51,747</td>
+    <td class="num">115</td><td class="num">51,433</td>
+    <td class="num">66,700</td>
+    <td class="num">33,500</td>
+    <td class="num">70,000</td>
+    <td class="num">62,900</td>
     <td class="num">47,400</td>
-    <td class="num loss">−491,251</td>
-    <td class="num loss">−8.40%</td>
+    <td class="num loss">−463,750</td>
+    <td class="num loss">−7.84%</td>
     <td class="num">+38,400</td></tr><tr><td>POSCO홀딩스</td><td>005490</td><td>NH투자증권·한국투자증권</td>
     <td class="num">89</td><td class="num">399,770</td>
+    <td class="num">513,000</td>
+    <td class="num">300,000</td>
+    <td class="num">385,500</td>
+    <td class="num">367,500</td>
     <td class="num">421,500</td>
     <td class="num gain">+1,934,000</td>
     <td class="num gain">+5.44%</td>
     <td class="num">+23,900</td></tr><tr><td>KODEX 200</td><td>069500</td><td>NH투자증권·한국투자증권</td>
     <td class="num">77</td><td class="num">111,107</td>
+    <td class="num">139,900</td>
+    <td class="num">100,150</td>
+    <td class="num">143,880</td>
+    <td class="num">87,670</td>
     <td class="num">—</td>
     <td class="num ">—</td>
     <td class="num ">—</td>
     <td class="num">+468,616</td></tr><tr><td>엘앤에프</td><td>066970</td><td>NH투자증권</td>
-    <td class="num">46</td><td class="num">105,439</td>
+    <td class="num">52</td><td class="num">102,578</td>
+    <td class="num">187,000</td>
+    <td class="num">88,400</td>
+    <td class="num">170,000</td>
+    <td class="num">104,300</td>
     <td class="num">148,200</td>
-    <td class="num gain">+1,966,984</td>
-    <td class="num gain">+40.55%</td>
-    <td class="num">−7,784</td></tr><tr><td>삼성전자우</td><td>005935</td><td>NH투자증권·한국투자증권</td>
-    <td class="num">25</td><td class="num">196,213</td>
+    <td class="num gain">+2,372,334</td>
+    <td class="num gain">+44.48%</td>
+    <td class="num">−3,933</td></tr><tr><td>삼성전자우</td><td>005935</td><td>NH투자증권·한국투자증권</td>
+    <td class="num">40</td><td class="num">189,846</td>
+    <td class="num">224,500</td>
+    <td class="num">172,500</td>
+    <td class="num">236,000</td>
+    <td class="num">138,600</td>
     <td class="num">—</td>
     <td class="num ">—</td>
     <td class="num ">—</td>
-    <td class="num">+1,140,736</td></tr><tr><td>현대모비스</td><td>012330</td><td>한국투자증권</td>
-    <td class="num">15</td><td class="num">498,733</td>
+    <td class="num">+1,163,245</td></tr><tr><td>현대모비스</td><td>012330</td><td>한국투자증권</td>
+    <td class="num">26</td><td class="num">485,981</td>
+    <td class="num">709,000</td>
+    <td class="num">425,500</td>
+    <td class="num">595,000</td>
+    <td class="num">526,000</td>
     <td class="num">420,000</td>
-    <td class="num loss">−1,181,000</td>
-    <td class="num loss">−15.79%</td>
-    <td class="num">+200,000</td></tr><tr><td>카카오뱅크</td><td>323410</td><td>NH투자증권</td>
+    <td class="num loss">−1,715,500</td>
+    <td class="num loss">−13.58%</td>
+    <td class="num">+200,000</td></tr><tr><td>한화오션</td><td>042660</td><td>NH투자증권·한국투자증권</td>
+    <td class="num">23</td><td class="num">78,457</td>
+    <td class="num">82,500</td>
+    <td class="num">74,500</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">82,200</td>
+    <td class="num gain">+86,100</td>
+    <td class="num gain">+4.77%</td>
+    <td class="num">0</td></tr><tr><td>카카오뱅크</td><td>323410</td><td>NH투자증권</td>
     <td class="num">14</td><td class="num">23,171</td>
+    <td class="num">24,850</td>
+    <td class="num">22,300</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
     <td class="num">20,950</td>
     <td class="num loss">−31,100</td>
     <td class="num loss">−9.59%</td>
-    <td class="num">0</td></tr></tbody></table>
+    <td class="num">0</td></tr></tbody></table></div>
   <p class="note">청산·기록불완전 종목: 애플(74주 매도, 매수기록 없음)</p>
 </div>
 
