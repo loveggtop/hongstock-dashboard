@@ -21,7 +21,9 @@ quotes_path = DATA / "web_quotes.json"
 web_quotes = json.loads(quotes_path.read_text(encoding="utf-8")) if quotes_path.exists() else {}
 web_quotes = {k: v for k, v in web_quotes.items() if not k.startswith("_")}
 
-positions = [p for p in trades["positions"] if p["qty"] > 0]
+excl_path = DATA / "exclude.json"
+excluded = set(json.loads(excl_path.read_text(encoding="utf-8")).get("exclude", [])) if excl_path.exists() else set()
+positions = [p for p in trades["positions"] if p["qty"] > 0 and p["name"] not in excluded]
 closed = [p for p in trades["positions"] if p["qty"] == 0]
 latest = imgs.get("latest_by_stock", {})
 images = imgs.get("images", {})
@@ -54,8 +56,8 @@ def rng(name, side):
 rows = []
 for p in positions:
     a = images.get(latest.get(p["name"], ""), None)
-    q = web_quotes.get(p["name"]) if not a else None
-    cur = a["price"] if a else (q["price"] if q else None)
+    q = web_quotes.get(p["name"])  # 웹 현재가가 있으면 캡처 가격보다 우선
+    cur = q["price"] if q else (a["price"] if a else None)
     cost = p["avg_price"] * p["qty"]
     ev = (cur - p["avg_price"]) * p["qty"] if cur else None
     evp = (cur / p["avg_price"] - 1) * 100 if cur and p["avg_price"] else None
@@ -66,11 +68,24 @@ for p in positions:
 total_cost = sum(r["cost"] for r in rows if r["currency"] == "KRW")
 total_ev = sum(r["ev"] for r in rows if r["ev"] is not None)
 eval_cost = sum(r["cost"] for r in rows if r["ev"] is not None)
-total_realized = sum(p["realized_pnl"] for p in trades["positions"] if p["currency"] == "KRW")
+total_realized = sum(p["realized_pnl"] for p in trades["positions"] if p["currency"] == "KRW" and p["name"] not in excluded)
 analyzed = [r for r in rows if r["analysis"]]
 quoted = [r for r in rows if r["quote"] and not r["analysis"]]
 priced = [r for r in rows if r["ev"] is not None]
 missing = [r for r in rows if r["ev"] is None]
+
+# ── docs/ 의 별도 보고서 링크 배너 (index.html 제외, 최신순) ─────────
+import re as _re
+report_links = ""
+_docs = FOLDER / "docs"
+if _docs.exists():
+    for _f in sorted((f for f in _docs.glob("*.html") if f.name != "index.html"), key=lambda f: f.name, reverse=True):
+        _m = _re.search(r"<title>(.*?)</title>", _f.read_text(encoding="utf-8"), _re.S)
+        _t = _m.group(1).strip() if _m else _f.stem
+        _d = _re.search(r"\((\d{4}-\d{2}-\d{2})\)\s*$", _t)
+        _label = f"[{_d.group(1)}] {_t[:_d.start()].strip()}" if _d else _t
+        report_links += (f'<div style="margin:14px 0 18px;padding:14px 16px;border-radius:10px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">'
+                         f'<a href="{_f.name}" style="color:#fff;text-decoration:none;font-weight:700;">📌 {_label} 보고서 보기 →</a></div>\n')
 
 # ── 손익률 다이버징 바 ─────────────────────────────────────────────
 bar_rows = sorted(priced, key=lambda r: -r["evp"])
@@ -78,7 +93,7 @@ max_abs = max(abs(r["evp"]) for r in bar_rows) if bar_rows else 1
 
 
 def bar_html(r):
-    w = abs(r["evp"]) / max_abs * 50  # 반폭 50%
+    w = abs(r["evp"]) / max_abs * 42  # 반폭 50% 중 라벨 여백 8% 확보
     cls = "gain" if r["evp"] >= 0 else "loss"
     side = "left:50%" if r["evp"] >= 0 else f"left:{50 - w:.2f}%"
     lbl_side = "bar-lbl-r" if r["evp"] >= 0 else "bar-lbl-l"
@@ -161,8 +176,11 @@ def card_html(r):
             for k, lbl in (("buy", "매수"), ("sell", "매도"), ("stop", "손절")) if strategy.get(k))
     if comment:
         items += f'<div class="strat"><span class="strat-tag strat-note">요약</span><span>{comment}</span></div>'
-    src = f'<div class="card-src">분석 기준: {a["peak_ref"]} · {r["img_file"]}</div>' if a else ""
-    return f'<div class="card">{head}{body}<div class="strats">{items}</div>{src}</div>'
+    q = r.get("quote")
+    cur_line = (f'<div class="card-sub">현재가 {won(r["cur"])}원 ({pct(q.get("change_pct", 0))}) · {q.get("source", "웹 시세")} {q.get("asof", "")}'
+                f' <span class="rng-note">(캡처 시점 가격 {won(a["price"])}원)</span></div>') if (q and a) else ""
+    src = f'<div class="card-src">지지/저항·전략은 NH 차트분석 AI 캡처 기준: {a["peak_ref"]} · {r["img_file"]}</div>' if a else ""
+    return f'<div class="card">{head}{cur_line}{body}<div class="strats">{items}</div>{src}</div>'
 
 
 def card_quote(r):
@@ -290,8 +308,8 @@ td.num, th.num {{ text-align:right; font-variant-numeric:tabular-nums }}
 footer {{ font-size:12px; color:var(--muted); margin-top:8px }}
 </style></head><body>
 <h1>보유종목 통합분석</h1>
-<p class="meta">생성일 {date.today().isoformat()} · 체결 {trades['trade_count']}건 ({', '.join(trades['generated_from'])}) · 현재가는 NH 차트분석 AI 캡처 시점 기준 (웹 시세 종목은 조회 시점)</p>
-
+<p class="meta">생성일 {date.today().isoformat()} · 체결 {trades['trade_count']}건 ({', '.join(trades['generated_from'])}) · 현재가·평가손익은 웹 시세 조회 시점 기준 ({', '.join(sorted({q.get('asof','') for q in web_quotes.values()}))}, {', '.join(sorted({q.get('source','') for q in web_quotes.values()}))}) · 지지/저항·매매전략은 NH 차트분석 AI 캡처 시점 기준</p>
+{report_links}
 <div class="kpis">
   <div class="kpi"><div class="kpi-l">보유 종목</div><div class="kpi-v">{len(rows)}개</div><div class="kpi-s">분석 이미지 {len(analyzed)}개 / 웹 시세 {len(quoted)}개 / 시세 없음 {len(missing)}개</div></div>
   <div class="kpi"><div class="kpi-l">총 매입금액 (보유분)</div><div class="kpi-v">{won(total_cost)}원</div></div>
@@ -301,7 +319,7 @@ footer {{ font-size:12px; color:var(--muted); margin-top:8px }}
 
 <div class="panel">
   <h2>종목별 평가손익률</h2>
-  <p class="desc">평균단가 대비 최근 분석 이미지의 현재가 기준</p>
+  <p class="desc">평균단가 대비 웹 시세 현재가 기준 (시세 없으면 분석 캡처 가격)</p>
   <div class="legend"><span><i style="background:var(--gain)"></i>수익</span><span><i style="background:var(--loss)"></i>손실</span></div>
   {''.join(bar_html(r) for r in bar_rows)}
 </div>
