@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>손실 종목 보유 지속 판단 분석 (2026-11-25)</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fa;color:#222;font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);color:#fff;padding:32px 24px}
+header a{color:#9ecbff;text-decoration:none;font-size:14px}
+header h1{margin:12px 0 6px;font-size:26px}
+header .meta{font-size:13px;opacity:.85}
+main{max-width:900px;margin:0 auto;padding:24px 16px 48px}
+.card{background:#fff;border-radius:12px;padding:20px 22px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card h2{margin:0 0 12px;font-size:20px;color:#0f3460;border-left:4px solid #0f3460;padding-left:10px}
+.card h3{margin:18px 0 8px;font-size:17px;color:#16213e}
+.toc a{color:#0f3460;text-decoration:none}
+.toc li{margin:4px 0}
+.summary{background:#eef4ff;border:1px solid #c9dafc}
+.hl{background:#fff3c4;padding:0 3px;border-radius:3px}
+.neg{color:#d63031;font-weight:700}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th{background:#16213e;color:#fff;padding:8px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px;border-bottom:1px solid #e5e8ef;text-align:right;white-space:nowrap}
+tr.total td{font-weight:700;background:#f6f8fc}
+.note{font-size:13px;color:#666}
+.conclusion{background:#1a1a2e;color:#f1f1f1}
+.conclusion h2{color:#ffd56b;border-color:#ffd56b}
+.conclusion ol li{margin-bottom:10px}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;background:#e8ecf5;color:#0f3460;margin-right:4px}
+@media (max-width:600px){header{padding:22px 16px}header h1{font-size:21px}.card{padding:16px}.card h2{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html">← 보유종목 통합분석으로</a>
+<h1>손실 종목 보유 지속 판단 분석</h1>
+<div class="meta">분석 보고서 · 2026-11-25 · 시세 기준 2026-11-24 종가(일부 장중가) · 웹 검색 기반</div>
+</header>
+<main>
+
+<div class="card toc">
+<h2>목차</h2>
+<ol>
+<li><a href="#s1">손실 규모: 전체 자산에서의 의미</a></li>
+<li><a href="#s2">투자 비중과 다변화</a></li>
+<li><a href="#s3">종목별 점검: 하락 원인·위험·회복 가능성</a></li>
+<li><a href="#s4">시장 전체 맥락</a></li>
+<li><a href="#s5">추가로 확인할 정보</a></li>
+<li><a href="#s6">스스로에게 물어볼 질문 3가지</a></li>
+</ol>
+</div>
+
+<div class="card summary">
+<h2>Executive Summary</h2>
+<ul>
+<li>총 매입 약 <b>1억 5,310만 원</b> → 평가 약 <b>1억 808만 원</b>, 손실 약 <span class="neg">4,500만 원(-29%)</span></li>
+<li>손실의 <b>약 69%</b>가 <span class="hl">POSCO홀딩스·카카오</span> 두 종목에 집중</li>
+<li>상위 2종목(현대모비스·POSCO) 비중 <b>61%</b>, 2차전지 노출(POSCO+엘앤에프) 약 36%</li>
+<li>KODEX 200 기준 지수 자체가 52주 고점 대비 약 -47%로, 손실 상당 부분은 시장 하락분. 다만 엘앤에프(실적 적자전환)·POSCO(이익 눈높이 하향)는 펀더멘털 요인이 섞여 있음</li>
+<li>11/25 장중 코스피가 6% 넘게 급락해 실제 평가손실은 이보다 클 수 있음</li>
+</ul>
+</div>
+
+<div class="card" id="s1">
+<h2>1. 손실 규모</h2>
+<div class="tbl"><table>
+<tr><th>종목</th><th>보유</th><th>평단가</th><th>현재가(≈)</th><th>손익률</th><th>평가손실</th><th>평단 회복 필요</th></tr>
+<tr><td>POSCO홀딩스</td><td>129</td><td>375,346</td><td>254,500</td><td class="neg">-32%</td><td class="neg">-1,559만</td><td>+47%</td></tr>
+<tr><td>카카오</td><td>441</td><td>65,435</td><td>30,350</td><td class="neg">-54%</td><td class="neg">-1,547만</td><td>+116%</td></tr>
+<tr><td>현대모비스</td><td>93</td><td>424,888</td><td>355,000</td><td class="neg">-16%</td><td class="neg">-650만</td><td>+20%</td></tr>
+<tr><td>엘앤에프</td><td>90</td><td>113,135</td><td>66,800</td><td class="neg">-41%</td><td class="neg">-417만</td><td>+69%</td></tr>
+<tr><td>삼성전자우</td><td>121</td><td>167,067</td><td>150,100</td><td class="neg">-10%</td><td class="neg">-205만</td><td>+11%</td></tr>
+<tr><td>KODEX 200</td><td>44</td><td>95,560</td><td>~76,000</td><td class="neg">-20%</td><td class="neg">-86만</td><td>+26%</td></tr>
+<tr><td>KODEX 200타겟위클리커버드콜</td><td>93</td><td>18,269</td><td>~14,200</td><td class="neg">-22%</td><td class="neg">-38만</td><td>분배금 별도</td></tr>
+<tr><td>LG디스플레이</td><td>1</td><td>9,690</td><td>-</td><td>-</td><td>미미</td><td>-</td></tr>
+<tr class="total"><td>합계</td><td></td><td></td><td></td><td class="neg">-29%</td><td class="neg">약 -4,500만</td><td></td></tr>
+</table></div>
+<p class="note">현재가: 현대모비스·삼성전자우 11/24 종가, POSCO·카카오 11/24 장중, 엘앤에프 11/23, KODEX 200 11/20, 커버드콜 11/17 기준. 이 계좌가 전체 금융자산의 일부라면 다른 자산까지 합친 전체 대비 비율로 다시 계산해 볼 것.</p>
+</div>
+
+<div class="card" id="s2">
+<h2>2. 투자 비중과 다변화</h2>
+<p>평가액 기준 비중: <b>현대모비스 31% · POSCO 30% · 삼성전자우 17% · 카카오 12% · 엘앤에프 6% · ETF 4%</b></p>
+<ul>
+<li><b>상위 2종목 61%</b>: 개별 종목 한두 개가 계좌 전체 방향을 좌우하는 구조</li>
+<li>POSCO(리튬)와 엘앤에프(양극재)는 모두 <span class="hl">2차전지 업황</span>에 연동되어 약 36%가 같은 위험에 노출</li>
+<li>ETF 비중이 작아 분산 효과가 거의 없고, KODEX 200에도 삼성전자가 포함되어 반도체 노출이 겹침</li>
+</ul>
+</div>
+
+<div class="card" id="s3">
+<h2>3. 종목별 점검</h2>
+
+<h3>카카오 <span class="tag">손실 -54%</span><span class="tag">회복 +116% 필요</span></h3>
+<ul>
+<li><b>하락 원인:</b> 시장 하락에 지배구조 이벤트가 겹침. 인적분할(카카오AI / 카카오X) 발표 당일 장중 13% 넘게 밀린 뒤 -7.49%로 마감</li>
+<li><b>실적:</b> 3분기 매출 2조 867억 원(+6%), 영업이익 2,403억 원(+7%)으로 본업 훼손보다는 재평가 기대 소멸에 가까움</li>
+<li><b>일정:</b> 임시주총 2027-01-15 → 분할기일 02-01 → 카카오AI 재상장·카카오X 변경상장 02-25 (분할비율 약 0.611:0.388). 분할 후 평단 관리도 둘로 나눠야 함</li>
+<li><b>증권가:</b> 목표가 하향 다수(메리츠 3.7만, 삼성 4만, 다올 4.5만, 하나 5만). 평단 위 목표가는 키움 7만 정도로, 6개월~1년 내 평단 회복은 증권가 전망으로도 어려운 구간</li>
+<li><b>긍정:</b> 전 경영진 시세조종 재판 무죄로 법적 불확실성 일부 해소, 1,500억 원 자사주 매입·소각</li>
+</ul>
+
+<h3>POSCO홀딩스 <span class="tag">손실 -32%</span><span class="tag">회복 +47% 필요</span></h3>
+<ul>
+<li><b>하락 원인:</b> 시장 하락 + <span class="hl">이익 기대치 하향</span>. 연초 2026년 영업이익 전망 약 3.14조 원 대비 회사 제시 연간 영업이익 1.8조 원 → 펀더멘털 요인</li>
+<li><b>위험:</b> 포스코 임금협상 잠정합의안 부결(반대 51.69%)로 쟁의 불확실성, 클리블랜드-클리프스 협력 지연으로 미국 자동차 강판 진출 차질, 리튬 가격</li>
+<li><b>긍정:</b> 3분기 영업이익 9,400억 원(+48%), 2,500억 원 자사주 매입·소각, PBR 0.34배</li>
+<li><b>증권가:</b> 미래에셋 목표가 47만 원 유지(11/3). 다만 일부 하향 흐름 존재</li>
+</ul>
+
+<h3>엘앤에프 <span class="tag">손실 -41%</span><span class="tag">회복 +69% 필요</span></h3>
+<ul>
+<li><b>하락 원인:</b> <span class="hl">3분기 영업손실 265억 원, 적자전환</span>(매출 8,744억 원 +34%). 환율·메탈 가격에 따른 판가(ASP) 하락 → 펀더멘털 요인</li>
+<li><b>주가 위치:</b> 52주 최고 225,000 / 최저 63,000으로 저점 부근, 하루 -11% 같은 높은 변동성</li>
+<li><b>성장 근거:</b> LFP 4개 고객사와 ESS 100GWh 규모 계약, 2027년 5만t 출하 예상</li>
+<li><b>증권가:</b> 하나증권 목표가 14만 원으로 하향</li>
+</ul>
+
+<h3>현대모비스 <span class="tag">손실 -16%</span><span class="tag">회복 +20% 필요</span></h3>
+<ul>
+<li>52주 범위 288,000~822,000. 고점 대비 큰 하락이지만 시장 동조 성격이 강함</li>
+<li><b>이벤트:</b> 램프사업 물적분할 주총 통과(찬성률 81.5%). 2027-04-01 분할 후 프랑스 OP모빌리티에 약 6,000억 원 매각. 단, 주식매수청구액이 2,300억 원을 넘으면 분할 철회 가능(매수청구가 408,394원)</li>
+<li><b>성장:</b> 보스턴다이내믹스 Atlas향 관절 액추에이터 시제품 11월 납품 개시</li>
+<li><b>증권가:</b> 매수 28 · 보유 2 · 매도 0, 12개월 평균 목표가 약 59.5만 원. 평단이 대부분 목표가보다 낮아 보유 종목 중 회복 거리가 가장 짧은 편</li>
+</ul>
+
+<h3>삼성전자우 · ETF</h3>
+<ul>
+<li>반도체는 정책 우려와 메모리 가격 하락 전망으로 흔들림. 골드만삭스는 삼성전자 목표가를 50만→35만 원으로 하향, 반면 iM증권은 최악의 시나리오가 상당 부분 반영됐다고 평가</li>
+<li>커버드콜 ETF는 11월 주당 266원 분배. 분배금 포함 시 실제 손실은 더 작지만, 급등 시 상승분 일부가 제한되고 분배금은 확정 수익이 아님</li>
+</ul>
+</div>
+
+<div class="card" id="s4">
+<h2>4. 시장 전체 맥락</h2>
+<ul>
+<li>KODEX 200 52주 범위 53,925~152,455 → 지수 자체가 고점 대비 약 절반 수준</li>
+<li>코스피는 삼성전자·SK하이닉스 비중이 매우 커 변동성이 극심(11/24 +6.32%로 5,006 마감 → 11/25 장중 -6%대)</li>
+<li><b>지수보다 더 빠진 종목:</b> 엘앤에프(고점 대비 약 -70%) → 개별 악재 신호</li>
+<li><b>지수와 비슷하게 빠진 종목:</b> 현대모비스·POSCO·카카오(각 -53~57%)</li>
+</ul>
+</div>
+
+<div class="card" id="s5">
+<h2>5. 추가로 확인할 정보</h2>
+<ul>
+<li><b>실적:</b> POSCO 4분기 실적·2027 가이던스, 엘앤에프 4분기 흑자 복귀 여부와 LFP 실제 출하량</li>
+<li><b>이벤트:</b> 카카오 1/15 임시주총 결과와 분할 후 두 회사 시가총액 비율, 현대모비스 주식매수청구 규모</li>
+<li><b>수급·원자재:</b> 외국인 순매도 진정 여부, 리튬 가격 추세(POSCO·엘앤에프 공통)</li>
+<li><b>본인 상황:</b> 자금 사용 시점, 손실 활용 가능한 세금 측면(제도 변화 확인)</li>
+</ul>
+</div>
+
+<div class="card conclusion" id="s6">
+<h2>스스로에게 물어볼 질문 3가지</h2>
+<ol>
+<li><b>오늘 이 종목을 현금으로 갖고 있다면, 지금 가격에 같은 금액만큼 새로 살 것인가?</b><br>평단가는 지나간 숫자이고, 판단 기준은 현재 가치와 전망이다.</li>
+<li><b>처음 산 이유가 아직 유효한가, 아니면 바뀌었는가?</b><br>카카오는 분할로 회사 구조가 바뀌고, POSCO는 이익 기대치가 낮아졌다.</li>
+<li><b>이 비중으로 시장이 한 번 더 -20% 빠져도 생활과 마음이 버틸 수 있는가?</b><br>상위 2종목 61% 집중도가 내 위험 감내 수준에 맞는지 점검한다.</li>
+</ol>
+<p class="note" style="color:#bbb">본 자료는 매수·매도 권유가 아닌 판단을 돕기 위한 정보이며, 증권사 목표가는 하락장에서 뒤늦게 조정되는 경향이 있어 참고 지표로만 활용할 것.</p>
+</div>
+
+</main>
+</body>
+</html>
